@@ -27,11 +27,11 @@ categories = [
 ]
 
 
-def test_category(description, cat):
-    for string in cat[1]:
+def test_category(description, category):
+    for string in category.keywords:
         
         if string.upper() in description.upper():
-            return cat[0]
+            return category.name
         else:
             pass
     return "Classificar"
