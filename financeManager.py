@@ -3,7 +3,7 @@ import gspread
 import time
 from collections import namedtuple
 
-month = "september"
+month = "oi"
 
 file =f"Inter_{month}.csv"
 
@@ -81,8 +81,6 @@ if last_row <= 8:
     last_row = 8
 
 for row in rows:
-    timestart = time.time()
     wks.insert_row([row[0], row[1], row[3], "", row[2]], last_row)
     last_row += 1
     time.sleep(1.5)
-    print(f"Tempo de execução: {time.time() - timestart}")
