@@ -11,7 +11,7 @@ Category = namedtuple('Category', ['name', 'keywords'])
 
 categories = [
     Category("Lanchonete", {"FRANCISCO CELIO", "Carla Ranielly de Lima", "ACAIDARANNYAVENIDA", "CANTINA", "NATALINE PINHEIRO"}),
-    Category("Supermercado", {"Supermercado", "super lua", "SAMIA CARLA P SOUSA"}),
+    Category("Supermercado", {"Supermercado", "super lua", "SAMIA CARLA P SOUSA", "CENTERBOX"}),
     Category("Dentista", {"Dentista"}),
     Category("Ônibus", {"MANDACARU"}),
     Category("Uber/99", {"No estabelecimento 99 *"}),
