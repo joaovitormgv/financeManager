@@ -2,10 +2,17 @@ import csv
 import gspread
 import time
 from collections import namedtuple
+from script import formate_csv
+from dotenv import load_dotenv
+import os
 
-month = "oi"
+load_dotenv()
+month = os.getenv("MONTH")
+file = f"Inter_{month}.csv"
 
-file =f"Inter_{month}.csv"
+
+input_file = f"/Users/joaovitormesquita/Desktop/Workspace/financeManager/input.csv"
+output_file = f"/Users/joaovitormesquita/Desktop/Workspace/financeManager/{file}"
 
 Category = namedtuple('Category', ['name', 'keywords'])
 
@@ -70,6 +77,8 @@ sa = gspread.service_account()
 sh = sa.open("Personal Finances")
 
 wks = sh.worksheet(f"{month}")
+
+formate_csv(input_file, output_file)
 
 rows = InterFin(file, categories)
 
