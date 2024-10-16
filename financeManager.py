@@ -2,16 +2,23 @@ import csv
 import gspread
 import time
 from collections import namedtuple
+from script import formate_csv
+from dotenv import load_dotenv
+import os
 
-month = "september"
+load_dotenv()
+month = os.getenv("MONTH")
+file = f"Inter_{month}.csv"
 
-file =f"Inter_{month}.csv"
+
+input_file = f"/Users/joaovitormesquita/Desktop/Workspace/financeManager/input.csv"
+output_file = f"/Users/joaovitormesquita/Desktop/Workspace/financeManager/{file}"
 
 Category = namedtuple('Category', ['name', 'keywords'])
 
 categories = [
     Category("Lanchonete", {"FRANCISCO CELIO", "Carla Ranielly de Lima", "ACAIDARANNYAVENIDA", "CANTINA", "NATALINE PINHEIRO"}),
-    Category("Supermercado", {"Supermercado", "super lua", "SAMIA CARLA P SOUSA"}),
+    Category("Supermercado", {"Supermercado", "super lua", "SAMIA CARLA P SOUSA", "CENTERBOX"}),
     Category("Dentista", {"Dentista"}),
     Category("Ônibus", {"MANDACARU"}),
     Category("Uber/99", {"No estabelecimento 99 *"}),
@@ -27,11 +34,11 @@ categories = [
 ]
 
 
-def test_category(description, cat):
-    for string in cat[1]:
+def test_category(description, category):
+    for string in category.keywords:
         
         if string.upper() in description.upper():
-            return cat[0]
+            return category.name
         else:
             pass
     return "Classificar"
@@ -71,6 +78,8 @@ sh = sa.open("Personal Finances")
 
 wks = sh.worksheet(f"{month}")
 
+formate_csv(input_file, output_file)
+
 rows = InterFin(file, categories)
 
 # Inicializa a variável para rastrear a última linha inserida
@@ -81,8 +90,6 @@ if last_row <= 8:
     last_row = 8
 
 for row in rows:
-    timestart = time.time()
     wks.insert_row([row[0], row[1], row[3], "", row[2]], last_row)
     last_row += 1
     time.sleep(1.5)
-    print(f"Tempo de execução: {time.time() - timestart}")
