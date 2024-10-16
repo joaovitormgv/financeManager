@@ -61,7 +61,8 @@ def substitute_commas(lines):
 def formate_csv (input_file, output_file):
     with open(input_file, 'r') as file:
         lines = file.readlines()
-
+    
+    lines = lines[6:]
     pre_processed_lines = organize_thousands(lines)
     processed_lines = substitute_commas(pre_processed_lines)
 
